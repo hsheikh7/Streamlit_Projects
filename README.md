@@ -4,7 +4,7 @@
 Welcome to the Streamlit_Projects repository! This collection features a series of Streamlit projects demonstrating interactive applications' power.
 
 ## First Project: Melbourne Housing Price Prediction
-![Cover Photo]([Housing_Price_Melbourne/image/cover.jpg](https://github.com/hsheikh7/Streamlit_Projects/blob/main/Housing_Price_Melbourne/image/Cover.jpg))
+![Cover Photo](https://github.com/hsheikh7/Streamlit_Projects/blob/main/Housing_Price_Melbourne/image/Cover.jpg)
 The first project is about predicting Melbourne's housing prices. Leveraging the capabilities of a RandomForestRegressor model, this project provides insights into housing market. The predictions are elegantly showcased through an interactive Streamlit app.
 
 ## Getting Started
