@@ -4,7 +4,7 @@ import pandas as pd
 from utils import * 
 
 # Load the pipeline from the joblib file
-loaded_pipeline = joblib.load('housing_pipeline.joblib')
+loaded_pipeline = joblib.load('Housing_Price_Melbourne/housing_pipeline.joblib')
 
 # Streamlit app code
 st.title("Melbourne Housing Price Prediction")

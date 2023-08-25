@@ -4,7 +4,7 @@ import pandas as pd
 
 
 def get_coordinates_for_suburb(suburb):
-    df = pd.read_csv("Ml_Suburb_Coordination.csv")  
+    df = pd.read_csv("Housing_Price_Melbourne/Ml_Suburb_Coordination.csv")  
     
     suburb_row = df[df['Suburb'] == suburb]
     
