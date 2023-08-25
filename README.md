@@ -7,12 +7,16 @@ Welcome to the Streamlit_Projects repository! This collection features a series 
 ![Cover Photo](https://github.com/hsheikh7/Streamlit_Projects/blob/main/Housing_Price_Melbourne/image/Cover.jpg)
 The first project is about predicting Melbourne's housing prices. Leveraging the capabilities of a RandomForestRegressor model, this project provides insights into housing market. The predictions are elegantly showcased through an interactive Streamlit app.
 
+## Second Project: Clean Air for India 
+![Cover Photo](https://github.com/hsheikh7/Streamlit_Projects/tree/main/India_Air_Quality/images/Cover_Air_Quality.png)
+This project is an interactive visualization of air quality data for cities in India. The goal of this project is to provide an accessible and informative way for people to explore air quality data and learn more about public policies.
+
 ## Getting Started
 
-To explore the Melbourne Housing Price Prediction project, follow these simple steps:
+To explore each project, follow these simple steps:
 
 1. Clone the repository: `git clone https://github.com/hsheikh7/Streamlit_Projects.git`
-2. Navigate to the project directory: `cd Housing_Price_Melbourne`
+2. Navigate to the project directory you like, for example: `cd Housing_Price_Melbourne`
 3. Install the necessary dependencies: `pip install -r requirements.txt`
 4. Launch the Streamlit app: `streamlit run app.py`
 
@@ -22,7 +26,7 @@ Upon running the Streamlit app, an engaging interface awaits. It allows you to i
 
 ## Results
 
-This project beautifully encapsulates the entire lifecycle of developing a housing price prediction model. The journey spans data collection, meticulous preprocessing, model training, comprehensive evaluation, strategic deployment, and seamless integration into a user-friendly Streamlit interface. The app delivers a captivating and interactive experience, inviting users to explore and engage with housing price forecasts.
+This project beautifully encapsulates the entire lifecycle of developing some urban planning projects. The journey spans data collection, meticulous preprocessing, model training, comprehensive evaluation, strategic deployment, and seamless integration into a user-friendly Streamlit interface. The app delivers a captivating and interactive experience, inviting users to explore and engage with housing price forecasts.
 
 ## Contributing
 Contributions to this project are warmly welcomed! If you encounter any issues or have innovative ideas for enhancements, don't hesitate to open an issue or submit a pull request.
