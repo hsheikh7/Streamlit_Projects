@@ -27,7 +27,7 @@ with st.expander('More Information'):
     st.write('The data originates from "Air Quality Data in India (2015 - 2020)" available at: https://www.kaggle.com/datasets/rohanrao/air-quality-data-in-india?select=city_day.csv')
 
 # Load the air quality dataset
-df = pd.read_csv('air_quality_data.csv')
+df = pd.read_csv('India_Air_Quality/air_quality_data.csv')
 
 # Remove rows with missing values in the date column
 df = df.dropna(subset=['Date'])
