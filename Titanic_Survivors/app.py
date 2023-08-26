@@ -1,9 +1,8 @@
 import streamlit as st
-# from Titanic_Survivors.utils.py import PrepProcesor, columns 
-
 import numpy as np
 import pandas as pd
 import joblib
+from utils import PrepProcesor, columns 
 
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.impute import SimpleImputer 
