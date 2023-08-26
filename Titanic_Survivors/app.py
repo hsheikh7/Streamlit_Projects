@@ -1,5 +1,5 @@
 import streamlit as st
-from titanic_survivors.utils import PrepProcesor, columns 
+from Titanic_Survivors.utils import PrepProcesor, columns 
 
 import numpy as np
 import pandas as pd
