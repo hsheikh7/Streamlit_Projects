@@ -75,9 +75,16 @@ def save_question(q_text, q_choices):
         
         cursor.execute('INSERT INTO questionnaire (question_id, choice_id) VALUES (?, ?)', (question_id, choice_id))
 
-
     connection.commit()
     connection.close()
+
+def get_choice_id(choice_text):
+    connection = sqlite3.connect(DATABASE_NAME)
+    cursor = connection.cursor()
+    cursor.execute('SELECT id FROM choice WHERE choice_text = ?', (choice_text,))
+    row = cursor.fetchone()
+    connection.close()
+    return row[0] if row else None
 
 def save_results(responses):
     connection = sqlite3.connect(DATABASE_NAME)
@@ -93,13 +100,16 @@ def get_results():
     connection = sqlite3.connect(DATABASE_NAME)
     
     query = '''
-        SELECT q.question_text, c.choice_text, COUNT(*) as count
-        FROM response r
-        JOIN question q ON r.question_id = q.id
-        JOIN choice c ON r.choice_id = c.id
-        GROUP BY r.question_id, r.choice_id
+        SELECT q.id, q.question_text, c.choice_text, COUNT(r.choice_id) as count
+        FROM questionnaire n
+        JOIN question q ON n.question_id = q.id
+        JOIN choice c ON n.choice_id = c.id
+        LEFT JOIN response r ON r.question_id = q.id AND r.choice_id = c.id
+        GROUP BY q.id, c.id
     '''
     df = pd.read_sql_query(query, connection)
     
     connection.close()
     return df
+
+        
