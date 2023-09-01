@@ -12,6 +12,9 @@ The first project is about predicting Melbourne's housing prices. Leveraging the
 ![Cover Photo](https://raw.githubusercontent.com/hsheikh7/Streamlit_Projects/main/India_Air_Quality/images/Cover_Air_Quality.png)
 This project is an interactive visualization of air quality data for cities in India. The goal of this project is to provide an accessible and informative way for people to explore air quality data and learn more about public policies.
 
+## Project 3: Clean Air for India 
+This is a practice of using machine learning in history. Input data, and unlock the Titanic's mystery: Would you survive? Using predictive models, the app calculates your chance of survival. It is a part of my Online Course on Maktabkhoone under the supervision of Soheil Tehranipour. 
+
 ## Getting Started
 
 To explore each project, follow these simple steps:
