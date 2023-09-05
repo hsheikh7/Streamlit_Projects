@@ -52,7 +52,6 @@ questions = get_survey()['question'].tolist()
 selected_question = st.selectbox("Select a question to remove", questions)
 
 if st.button("Remove Question"):
-   # Get the ID of the selected question
     connection = sqlite3.connect('survey.db')
     cursor = connection.cursor()
     cursor.execute('SELECT id FROM question WHERE question_text = ?', (selected_question,))
@@ -60,10 +59,8 @@ if st.button("Remove Question"):
     if row:
         selected_question_id = row[0]
 
-        # Remove the selected question
         remove_question(selected_question_id)
 
-        # Update the survey data in session state
         st.session_state['survey'] = get_survey()
 
         st.success(f"Question '{selected_question}' removed successfully!")
@@ -87,6 +84,7 @@ for index, row in questions.iterrows():
     choice_id = get_choice_id(response)
     responses.append((index + 1, choice_id))
 
+# ------------ Captcha ------------
 if 'num1' not in st.session_state:
     st.session_state['num1'] = random.randint(1, 10)
 if 'num2' not in st.session_state:
