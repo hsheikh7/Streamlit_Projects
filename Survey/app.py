@@ -1,8 +1,9 @@
 import streamlit as st
 import pandas as pd 
-from DButils import create_tables, get_survey, save_question, save_results, get_results, get_choice_id
+from DButils import create_tables, get_survey, save_question, save_results, get_results, get_choice_id, remove_question
 import plotly.express as px
 import random
+import sqlite3
 
 st.set_page_config(layout="wide")
 
@@ -42,6 +43,30 @@ submitted = st.button("Add question to survey")
 if submitted:
     save_question(q_text, q_choices)
     st.session_state['survey'] = get_survey()
+
+# ---------- Removing a question -------------------- 
+st.header("Removing a Question")
+questions = get_survey()['question'].tolist()
+
+# Let the user select a question to remove
+selected_question = st.selectbox("Select a question to remove", questions)
+
+if st.button("Remove Question"):
+   # Get the ID of the selected question
+    connection = sqlite3.connect('survey.db')
+    cursor = connection.cursor()
+    cursor.execute('SELECT id FROM question WHERE question_text = ?', (selected_question,))
+    row = cursor.fetchone()
+    if row:
+        selected_question_id = row[0]
+
+        # Remove the selected question
+        remove_question(selected_question_id)
+
+        # Update the survey data in session state
+        st.session_state['survey'] = get_survey()
+
+        st.success(f"Question '{selected_question}' removed successfully!")
 
 # ---------- Show Question After Drafting --------------------
 st.write("Here are questions.")
@@ -106,74 +131,6 @@ fig = px.bar(df, x='id', y='count', color='choice_text', title='Survey Results',
 st.plotly_chart(fig)
 
 # ------- Vis Part 2: an array of bar graph figures, one for each question 
-# figures = []
-
-# for q in df['question_text'].unique():
-#     # Filter the data for the current question
-#     data = df[df['question_text'] == q]
-    
-#     # Create a bar chart for the current question
-#     fig = px.bar(data, x='choice_text', y='count', title=q)
-#     fig.update_layout(showlegend=False)
-#     fig.update_xaxes(title_text="Response")
-#     fig.update_yaxes(title_text="Count")
-    
-#     # Append the figure to the list of figures
-#     figures.append(fig)
-
-# # Choose which graph to display with a set of radio buttons
-# if not df.empty:
-#     st.info("### Choose the graph for a specific question")
-#     f = st.radio("Choose a graph", options=df['question_text'].unique())
-#     column_index = list(df['question_text'].unique()).index(f)
-#     st.plotly_chart(figures[column_index])
-# else:
-#     st.warning("No data available to display.")
-
-
-# survey = get_survey()
-# results = get_results()
-
-# figures = []
-
-# # Iterate over each question in the survey
-# for q in survey['question'].unique():
-#     # Get the list of all choices for the current question
-#     choices = survey[survey['question'] == q]['choices'].iloc[0].split(', ')
-    
-#     # Filter the results for the current question
-#     data = results[results['question_text'] == q]
-    
-#     # Create a DataFrame with all choices and zero counts
-#     all_choices = pd.DataFrame({'choice_text': choices, 'count': [0] * len(choices)})
-    
-#     # Merge the data with the all_choices DataFrame
-#     data = pd.merge(all_choices, data, on='choice_text', how='left')
-    
-#     # Merge the data with the all_choices DataFrame
-#     data = pd.merge(all_choices, data, on='choice_text', how='left', suffixes=('', '_y'))
-
-#     # Fill missing values with zero
-#     data['count'] = data['count'].fillna(0)
-    
-#     # Create a bar chart for the current question
-#     fig = px.bar(data, x='choice_text', y='count', title=q)
-#     fig.update_layout(showlegend=False)
-#     fig.update_xaxes(title_text="Response")
-#     fig.update_yaxes(title_text="Count")
-    
-#     # Append the figure to the list of figures
-#     figures.append(fig)
-
-# # Choose which graph to display with a set of radio buttons
-# if not results.empty:
-#     st.info("### Choose the graph for a specific question")
-#     f = st.radio("Choose a graph", options=survey['question'].unique())
-#     column_index = list(survey['question'].unique()).index(f)
-#     st.plotly_chart(figures[column_index])
-# else:
-#     st.warning("No data available to display.")
-
 
 df = get_survey()
 results = get_results()
@@ -198,8 +155,8 @@ for q in df['question'].unique():
 
 # Choose which graph to display with a set of radio buttons
 if not df.empty:
-    st.info("### Choose the graph for a specific question")
-    f = st.radio("Choose a graph", options=df['question'].unique())
+    st.info("### Bar Chart for Each Question")
+    f = st.radio("Choose a question", options=df['question'].unique())
     column_index = list(df['question'].unique()).index(f)
     st.plotly_chart(figures[column_index])
 else:

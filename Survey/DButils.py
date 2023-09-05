@@ -113,3 +113,18 @@ def get_results():
     return df
 
         
+def remove_question(question_id):
+    connection = sqlite3.connect(DATABASE_NAME)
+    cursor = connection.cursor()
+
+    # Delete the question from the question table
+    cursor.execute('DELETE FROM question WHERE id = ?', (question_id,))
+
+    # Delete the question's choices from the questionnaire table
+    cursor.execute('DELETE FROM questionnaire WHERE question_id = ?', (question_id,))
+
+    # Delete the question's responses from the response table
+    cursor.execute('DELETE FROM response WHERE question_id = ?', (question_id,))
+
+    connection.commit()
+    connection.close()
