@@ -1,8 +1,6 @@
 
 import pandas as pd
 
-
-
 def get_coordinates_for_suburb(suburb):
     df = pd.read_csv("Housing_Price_Melbourne/Ml_Suburb_Coordination.csv")  
     
