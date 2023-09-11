@@ -1,10 +1,9 @@
 import streamlit as st
 import pandas as pd
-import geopandas as gpd
 import folium
 from streamlit_folium import folium_static
-import numpy as np
-from sklearn.preprocessing import LabelEncoder
+# import numpy as np
+# from sklearn.preprocessing import LabelEncoder
 
 # ----------- Setup the Data Table -----------
 
