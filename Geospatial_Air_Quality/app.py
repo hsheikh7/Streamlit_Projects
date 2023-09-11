@@ -3,10 +3,10 @@ import pandas as pd
 import geopandas as gpd
 import folium
 from streamlit_folium import folium_static
-from geopy.geocoders import Nominatim
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
 
+# ----------- Setup the table -----------
 @st.cache_data
 def load_data():
     data = pd.read_csv('air_quality_data.csv')
@@ -22,7 +22,7 @@ def merge_data():
     merged_data = pd.merge(air_quality_data, city_coordinates, on='City', how='left')
     return merged_data
 
-# Create a Streamlit app
+# ----------- Create a Streamlit app -----------
 st.title('Air Quality Spatial Analysis')
 
 # Filter the dataset by year
@@ -38,30 +38,27 @@ selected_pollutant = st.sidebar.selectbox('Select Pollutant', ['PM2.5', 'PM10', 
 with st.sidebar.expander('More Information'):
     # Add an "About" subsection
     st.markdown('### About The Project')
-    st.write('This project is an interactive visualization of air quality data for cities in India. The goal of this project is to provide an accessible and informative way for people to explore air quality data and learn more about public policies.')
+    st.write('This project is an interactive visualization of air quality data for cities in India.')
 
     # Add a subsection on air quality in India
     st.markdown('### Air Quality in India')
-    st.write('Air quality in India is a vital issue due to its severe health impacts, including respiratory diseases and increased healthcare costs, economic productivity losses, and environmental degradation. Also, India\'s commitment to global agreements and the interconnectedness of air pollution and climate change underline the urgency of improving air quality.\n\nUrbanization, industrialization, and regulatory needs demand attention. Enhancing air quality ensures better quality of life, sustains long-term development, and fosters a healthier population. Despite progress, sustained efforts are crucial to mitigate the broad spectrum of issues stemming from poor air quality.')
+    st.write('Air quality in India is a vital issue due to its severe health impacts, economic productivity losses and environmental degradation.')
 
     # Add a subsection on the source code
     st.markdown('### Clean Air for India')
-    st.write('By providing accessible air quality information, we aim to enhance awareness and create a way for people to collaborate effectively. This approach fosters informed actions, empowering individuals to collectively contribute to improving air quality and aligns with the website\'s focus on enhancing public engagement for cleaner air.')
+    st.write('By providing accessible air quality information, I aim to enhance awareness and create a way for people to collaborate effectively.')
 
     # Add a subsection on the source code
     st.markdown('### Source Code')
-    st.write('The source code for this project is written in Python and uses the Streamlit and Plotly libraries to create a web-based user-friendly interface. The code is available on GitHub: https://github.com/hsheikh7/Streamlit_Projects.')
+    st.write('The code is available on GitHub: https://github.com/hsheikh7/Streamlit_Projects.')
 
     # Add a subsection on the source code
     st.markdown('### Data')
     st.write('The data originates from "Air Quality Data in India (2015 - 2020)" available at: https://www.kaggle.com/datasets/rohanrao/air-quality-data-in-india?select=city_day.csv')
 
 
-
-# Filter the data based on user selections and remove rows with NaN values for the selected pollutant
 filtered_df = df[(df['Date'] == selected_date) & ~df[selected_pollutant].isna()]
 
-# Create a map centered around a city with zoom level based on user selection
 city_row = df.iloc[0]  # You can choose any city as the default center
 m = folium.Map(location=[city_row['Latitude'], city_row['Longitude']], zoom_start=5)
 
