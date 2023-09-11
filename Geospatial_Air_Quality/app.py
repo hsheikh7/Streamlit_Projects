@@ -6,7 +6,10 @@ from streamlit_folium import folium_static
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
 
-# ----------- Setup the table -----------
+# ----------- Setup the Data Table -----------
+
+st.set_page_config(layout="wide")
+
 @st.cache_data
 def load_data():
     data = pd.read_csv('air_quality_data.csv')
