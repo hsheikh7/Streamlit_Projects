@@ -1,4 +1,4 @@
-from geopy.geocoders import Nominatim
+from pip.geocoders import Nominatim
 import pandas as pd
 
 path = '/air_quality_data.csv'
