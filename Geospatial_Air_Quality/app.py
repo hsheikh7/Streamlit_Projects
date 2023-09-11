@@ -12,13 +12,13 @@ st.set_page_config(layout="wide")
 
 @st.cache_data
 def load_data():
-    data = pd.read_csv('air_quality_data.csv')
+    data = pd.read_csv('Geospatial_Air_Quality/air_quality_data.csv')
     data['Date'] = pd.to_datetime(data['Date'], format='%m/%d/%Y').dt.date
     # le = LabelEncoder()
     # data['City_Encoded'] = le.fit_transform(data['City'])
     return data
 
-city_coordinates = pd.read_csv('city_coordinates.csv')
+city_coordinates = pd.read_csv('Geospatial_Air_Quality/city_coordinates.csv')
 
 def merge_data():
     air_quality_data = load_data()
